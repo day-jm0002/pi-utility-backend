@@ -1,0 +1,22 @@
+USE [DCV_PI]
+GO
+
+/****** Object:  StoredProcedure [dbo].[P_OBTER_DESENVOLVEDOR]    Script Date: 11/10/2023 20:49:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[P_OBTER_DESENVOLVEDOR]
+as
+BEGIN
+
+	SELECT * FROM DESENVOLVEDORES
+	ORDER BY Nome
+
+END
+GO
+
+

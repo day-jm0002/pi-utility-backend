@@ -1,0 +1,14 @@
+USE DCV_PI
+GO
+
+CREATE PROCEDURE dbo.P_OBTER_LISTA_TIPO_USUARIOS_PI
+AS
+
+SELECT 
+	CodTipoUsuario,
+	Nome,
+	Ativo
+FROM TipoUsuario
+ORDER BY CodTipoUsuario
+
+GO
