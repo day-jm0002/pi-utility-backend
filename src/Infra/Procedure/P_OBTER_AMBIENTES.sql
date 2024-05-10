@@ -1,7 +1,12 @@
-USE DCV_PI
+USE [DCV_PI]
+GO
+/****** Object:  StoredProcedure [dbo].[P_OBTER_AMBIENTES]    Script Date: 09/05/2024 16:37:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[P_OBTER_AMBIENTES]  
+ALTER PROCEDURE [dbo].[P_OBTER_AMBIENTES]  
 AS  
 BEGIN  
   
@@ -10,18 +15,21 @@ a.Id
 ,Ambiente AS 'Nome'  
 ,Branch as 'Branch'  
 ,NumeroChamado as 'NumeroChamado'  
-,Descricao as 'Descricao'  
+,a.Descricao as 'Descricao'  
 ,IdResponsavel as 'DevId'  
 ,dev.Nome as 'Desenvolvedor'
 ,IdNegocio as 'NegId'
 ,neg.Nome as 'Negocio'
-,LinkDeAcesso as 'Link'  
+,LinkDeAcesso as 'Link'
+,AMS.Id as 'SituacaoId'
+,AMS.Descricao as 'Situacao'
 from dbo.ambientes a Inner Join  
 desenvolvedores as dev  
 on a.IdResponsavel = dev.Id  
 Inner Join Negocio as neg
-on a.idNegocio = neg.id
+on a.IdNegocio = neg.id
+Inner join AmbienteStatus AMS
+on a.Situacao = AMS.id
 order by a.Id  
   
 END
-

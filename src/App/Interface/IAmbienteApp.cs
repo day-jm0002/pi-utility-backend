@@ -13,5 +13,7 @@ namespace App.Interface
         Task<AmbienteResultQa> ObterPacoteQa();
         Task AtualizarAmbiente(AmbienteSignature ambienteSignature);
         Task AtualizarAmbienteQa(AmbienteSignatureQa ambienteSignature);
+        Task AtualizarChamadoAmbienteQa(AmbienteChamadoSignature ambienteSignature);
+
     }
 }

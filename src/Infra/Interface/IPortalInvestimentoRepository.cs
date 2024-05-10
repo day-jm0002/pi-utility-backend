@@ -8,6 +8,7 @@ namespace Infra
 {
     public interface IPortalInvestimentoRepository
     {
+        Task ExcluirFeatureAmbiente(int chamadoId);
         Task AtualizarAmbientesPI(EditarAmbienteRepositorySignature signature);
         Task AtualizarAmbientesPIQa(EditarAmbienteQaRepositorySignature signature);
 
@@ -23,14 +24,12 @@ namespace Infra
         Task<int> AtualizarUsuarioAsync(EditarUSuarioRepositorySignature signature);
         Task<Infotreasury> ObterDataGiroInfotreasury();
         Task<IList<Ambiente>> ObterAmbientesPI();
-
         Task<AmbienteQa> ObterAmbientesPIQa();
         Task<IList<Pacote>> ObterListaPacoteQa();
-
         Task<IList<Negocio>> ObterNegocioPI();
         Task<Perfil> ObterPerfilPorCodCliente(PerfilRepositorySignature signature);
-
         Task<IList<AmbienteStatus>> ObterStatus();
+        Task AtualizarChamadoAmbienteQa(ChamadoAmbienteQaRepositorio signature);
 
     }
 }

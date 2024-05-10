@@ -49,5 +49,14 @@ namespace PI.Utility.Controllers
         }
 
 
+        [HttpPost]
+        [Route(nameof(AtualizarChamadoAmbientesQa))]
+        public async Task<ActionResult> AtualizarChamadoAmbientesQa(AmbienteChamadoSignature ambienteQaSignature)
+        {
+            await _ambienteApp.AtualizarChamadoAmbienteQa(ambienteQaSignature);
+            return Ok(true);
+        }
+
+
     }
 }

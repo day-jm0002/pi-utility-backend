@@ -1,6 +1,6 @@
 USE [DCV_PI]
 GO
-/****** Object:  StoredProcedure [dbo].[P_ATUALIZAR_AMBIENTE]    Script Date: 22/03/2024 16:30:14 ******/
+/****** Object:  StoredProcedure [dbo].[P_ATUALIZAR_AMBIENTE]    Script Date: 09/05/2024 16:39:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

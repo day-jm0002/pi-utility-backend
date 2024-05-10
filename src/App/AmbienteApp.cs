@@ -5,6 +5,7 @@ using Infra;
 using Infra.Signature;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,8 +45,13 @@ namespace App
             editar.DataImplatacao = ambienteSignature.DataImplantacao;
 
             await _portalInvestimentoRepository.AtualizarAmbientesNovoPIQa(editar);
-
-            foreach (var item in ambienteSignature.Branch)
+            var excluir = ambienteSignature.Branch.FindAll(x => x.Apagar == true);
+            foreach (var item in excluir)
+            {
+                await _portalInvestimentoRepository.ExcluirFeatureAmbiente(item.ChamadoId);
+            }
+            var atualizar = ambienteSignature.Branch.FindAll(x => x.Apagar == false);
+            foreach (var item in atualizar)
             {
                 var pacote = new PacoteRepositorySignature();
                 pacote.ReleaseId = ambienteSignature.Id;
@@ -117,6 +123,16 @@ namespace App
                 ambienteResult.Add(result);
             }
             return ambienteResult;
+        }
+
+        public async Task AtualizarChamadoAmbienteQa(AmbienteChamadoSignature ambienteSignature)
+        {
+            var repositorySignature = new ChamadoAmbienteQaRepositorio();
+            repositorySignature.ChamadoId = ambienteSignature.ChamadoId;
+            repositorySignature.SituacaoId = ambienteSignature.SituacaoId;
+            repositorySignature.NegocioTesteId = ambienteSignature.NegocioTesteId;
+
+           await _portalInvestimentoRepository.AtualizarChamadoAmbienteQa(repositorySignature);
         }
     }
 }

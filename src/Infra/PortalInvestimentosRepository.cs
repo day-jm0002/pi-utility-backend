@@ -14,7 +14,7 @@ using Infra.Signature;
 
 namespace Infra
 {
-    public class PortalInvestimentosRepository : BaseRepositoryAdo , IPortalInvestimentoRepository
+    public class PortalInvestimentosRepository : BaseRepositoryAdo, IPortalInvestimentoRepository
     {
         public PortalInvestimentosRepository() : base(new DcvPortalInvestimentosParameters())
         {
@@ -291,6 +291,49 @@ namespace Infra
             {
                 throw ex;
             }
+        }
+
+        public async Task ExcluirFeatureAmbiente(int chamadoId)
+        {
+            try
+            {
+                var parametros = new List<SqlParameter>(0);
+
+                parametros.Add(new SqlParameter("@ChamadoId", SqlDbType.Int) { Value =chamadoId });
+               
+                var execute = new CreateExecuteAdo()
+                    .WithParameters(parametros)
+                    .WithProcedure("P_ExcluirFeatureAmbiente");
+
+                await ExecuteNonQueryAsync(execute);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task AtualizarChamadoAmbienteQa(ChamadoAmbienteQaRepositorio signature)
+        {
+            try
+            {
+                var parametros = new List<SqlParameter>();
+                parametros.Add(new SqlParameter("@ChamadoId", SqlDbType.Int) { Value = signature.ChamadoId });
+                parametros.Add(new SqlParameter("@NegocioTesteId", SqlDbType.VarChar) { Value = signature.NegocioTesteId });
+                parametros.Add(new SqlParameter("@SituacaoId", SqlDbType.VarChar) { Value = signature.SituacaoId });
+
+                var execute = new CreateExecuteAdo()
+                    .WithParameters(parametros)
+                    .WithProcedure("P_ATUALIZAR_CHAMADO_AMBIENTE_PI");
+
+                await ExecuteNonQueryAsync(execute);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+         
         }
     }
 }
