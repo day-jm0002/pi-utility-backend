@@ -127,6 +127,7 @@ namespace Infra
                 parametros.Add(new SqlParameter("@DevId", SqlDbType.Int) { Value = signature.DevId });
                 parametros.Add(new SqlParameter("@NegId", SqlDbType.Int) { Value = signature.NegId });
                 parametros.Add(new SqlParameter("@SitId", SqlDbType.Int) { Value = signature.SitId });
+                parametros.Add(new SqlParameter("@Dependencia", SqlDbType.VarChar) { Value = signature.Dependencia });
 
 
                 var execute = new CreateExecuteAdo()
@@ -221,7 +222,7 @@ namespace Infra
 
                 var execute = new CreateExecuteAdo()
                     .WithParameters(parametros)
-                    .WithProcedure("P_PERFILINVESTIDOR_UNIFICADO");
+                    .WithProcedure("P_CONSULTAR_PERFIL_CLIENTES_SUITABILITY_MARCO");
 
                 return await ExecuteObjectAsync<Perfil>(execute);
         }

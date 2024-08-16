@@ -19,5 +19,6 @@ namespace Infra.Entidade
         public string Negocio { get; set; }
         public string Link { get; set; }
         public string Situacao { get; set; }
+        public string Dependencia { get; set; }
     }
 }

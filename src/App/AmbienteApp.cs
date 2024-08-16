@@ -30,6 +30,7 @@ namespace App
             editar.DevId = ambienteSignature.DevId;
             editar.NegId = ambienteSignature.NegId;
             editar.SitId = ambienteSignature.SitId;
+            editar.Dependencia = ambienteSignature.Dependencia;
 
             await _portalInvestimentoRepository.AtualizarAmbientesPI(editar);
         }
@@ -120,6 +121,8 @@ namespace App
                 result.Link = ambiente.Link;
                 result.SituacaoId = ambiente.SituacaoId;
                 result.Situacao = ambiente.Situacao;
+                result.Dependencia = ambiente.Dependencia;
+                
                 ambienteResult.Add(result);
             }
             return ambienteResult;

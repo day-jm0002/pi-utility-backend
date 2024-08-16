@@ -13,5 +13,6 @@ namespace Infra.Signature
         public int DevId { get; set; }
         public int NegId { get; set; }
         public int SitId { get; set; }
+        public string Dependencia { get; set; }
     }
 }

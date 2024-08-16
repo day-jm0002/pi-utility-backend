@@ -163,6 +163,14 @@ namespace App
             perfilResult.DataAtualizacao = perfil.DATAATUALIZACAO.ToString();
             perfilResult.CodPerfil = perfil.CODPERFIL;
             perfilResult.Base = perfil.BASE;
+            perfilResult.Nome = perfil.NOME;
+            perfilResult.Perfil = perfil.PERFIL;
+            perfilResult.NomePerfil = perfil.NOMEPERFIL;
+            perfilResult.BasePerfil = perfil.BASEPERFIL;
+            perfilResult.NomePerfil = perfil.NOMEPERFIL;
+            perfilResult.CodCategoria = perfil.CODCATEGORIA;
+            perfilResult.NomeCategoria = perfil.NOMECATEGORIA;
+            perfilResult.BaseCategoria = perfil.BASECATEGORIA;
 
             return perfilResult;
         }
