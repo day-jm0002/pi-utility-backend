@@ -14,6 +14,6 @@ namespace App.Interface
         Task AtualizarAmbiente(AmbienteSignature ambienteSignature);
         Task AtualizarAmbienteQa(AmbienteSignatureQa ambienteSignature);
         Task AtualizarChamadoAmbienteQa(AmbienteChamadoSignature ambienteSignature);
-
+        Task LiberarChamadoAmbientesQa();
     }
 }

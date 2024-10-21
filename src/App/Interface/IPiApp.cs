@@ -13,7 +13,6 @@ namespace App.Interface
         Task <IList<TipoAutenticacaoResult>> ListaTipoAutenticacaoAsync();
         Task <UsuarioPiResult> UsuarioPorCodigoClienteAsync(UsuarioSignature signature);
         Task<int> AtualizarUsuarioAsync(EditarUsuarioSignature signature);
-        Task<InfotreasuryResult> ObterStatusInfotreasury();
         Task<LimparCacheResult> LimperCacheStage(LimparCacheSignature signature);
 
         Task<PerfilResult> ObterPerfilCliente(PerfilSignature signature);

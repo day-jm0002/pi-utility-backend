@@ -14,5 +14,6 @@ namespace Infra.Entidade
 
         public int SituacaoId { get; set; }
         public string Descricao { get; set; }
+        public string Dependencia { get; set; }
     }
 }

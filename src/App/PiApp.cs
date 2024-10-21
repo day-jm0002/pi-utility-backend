@@ -120,12 +120,6 @@ namespace App
            return 0;
        }
 
-       public async Task<InfotreasuryResult> ObterStatusInfotreasury()
-       {
-          var infotreasury = await _usuarioPiRepository.ObterDataGiroInfotreasury();
-          return new InfotreasuryResult { DataGiro = infotreasury.DataGiro , Message = "Ok" };
-       }
-
        public async Task<LimparCacheResult> LimperCacheStage(LimparCacheSignature signature)
        {
            var limparCacheResult = new LimparCacheResult();

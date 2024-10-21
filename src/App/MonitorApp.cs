@@ -3,13 +3,12 @@ using App.Result;
 using Proxy.DriveAMnet.Interface;
 using Proxy.Sinacor.Interface;
 using Proxy.SisFinace;
-using Proxy.SmartBrain;
 using Proxy.SmartBrain.Interface;
+using Proxy.Icatu.Interface;
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
+using Infra.Converter;
+using Infra;
 
 namespace App
 {
@@ -19,13 +18,17 @@ namespace App
         private readonly ISinacorProxy _sinacorProxy;
         private readonly ISmartBrainProxy _smartBrainProxy;
         private readonly ISisFinanceProxy _sisfinance;
+        private readonly IIcatuProxy _icatu;
+        private readonly IPortalInvestimentoRepository _usuarioPiRepository;
 
-        public MonitorApp(IDriveAMnetProxy driveAMnetProxy, ISinacorProxy sinacorProxy, ISmartBrainProxy smartBrainProxy, ISisFinanceProxy sisFinanceProxy)
+        public MonitorApp(IDriveAMnetProxy driveAMnetProxy, ISinacorProxy sinacorProxy, ISmartBrainProxy smartBrainProxy, ISisFinanceProxy sisFinanceProxy, IIcatuProxy icatuProxy, IPortalInvestimentoRepository portalInvestimentoRepository)
         {
             _driveAMnetProxy = driveAMnetProxy;
             _sinacorProxy = sinacorProxy;
             _smartBrainProxy = smartBrainProxy;
             _sisfinance = sisFinanceProxy;
+            _icatu = icatuProxy;
+            _usuarioPiRepository = portalInvestimentoRepository;
         }
         public async Task<DriveAMnetResult> ObterAutenticacaoDriveAMnet()
         {
@@ -101,5 +104,22 @@ namespace App
                 return result;
             }
         }
+
+        public async Task<IcatuResult> ObterGrauParentescoIcatu()
+        {
+            var response = await _icatu.ObterGrauParentesco();
+            if (response.Sucesso)
+            {
+                return new IcatuResult { Sucesso = true , Mensagem = "Comunicação Ok !"};
+            }
+            return new IcatuResult { Sucesso = false , Mensagem = response.Mensagem };
+        }
+
+        public async Task<InfotreasuryResult> ObterStatusInfotreasury()
+        {
+            var infotreasury = await _usuarioPiRepository.ObterDataGiroInfotreasury();
+            return new InfotreasuryResult { DataGiro = infotreasury.DataGiro, Message = "Ok" };
+        }
+
     }
 }

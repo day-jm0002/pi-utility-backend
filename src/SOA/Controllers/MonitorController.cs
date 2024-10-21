@@ -3,6 +3,7 @@ using App.Result;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proxy.DriveAMnet.Interface;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -78,6 +79,29 @@ namespace PI.Utility.Controllers
             else
             {
                 return NotFound(retorno);
+            }
+        }
+
+        [HttpGet]
+        [Route(nameof(StatusIcatu))]
+        public async Task<ActionResult<IcatuResult>> StatusIcatu()
+        {
+            var retorno = await _monitorApp.ObterGrauParentescoIcatu();
+            return Ok(retorno);
+        }
+
+        [HttpGet]
+        [Route(nameof(ObterStatusInfotreasury))]
+        public async Task<ActionResult<InfotreasuryResult>> ObterStatusInfotreasury()
+        {
+            try
+            {
+                var info = await _monitorApp.ObterStatusInfotreasury();
+                return Ok(info);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new InfotreasuryResult { Message = ex.Message });
             }
         }
 

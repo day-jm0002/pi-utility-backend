@@ -60,6 +60,7 @@ namespace App
                 pacote.ChamadoId = item.ChamadoId;
                 pacote.NegocioTesteId = item.NegocioTesteId;
                 pacote.SituacaoId = item.SituacaoId;
+                pacote.Dependencia = string.IsNullOrEmpty(item.Dependencia) ? "" : item.Dependencia;
                 await _portalInvestimentoRepository.AtualizarChamadosQa(pacote);
             }
         }
@@ -87,12 +88,13 @@ namespace App
                     lista.Add(new PacoteReleaseQa 
                     { 
                         ReleaseId = item.ReleaseId, 
-                        Branch = item.Branch ,
+                        Branch = item.Branch,
                         NegocioTeste = item.Nome,
                         NegocioTesteId = item.NegocioId,
                         SituacaoId = item.SituacaoId,
                         Situacao = item.Descricao,
-                        ChamadoId = item.ChamadoId                                       
+                        ChamadoId = item.ChamadoId,
+                        Dependencia = item.Dependencia
                     });
                 }
             }
@@ -136,6 +138,11 @@ namespace App
             repositorySignature.NegocioTesteId = ambienteSignature.NegocioTesteId;
 
            await _portalInvestimentoRepository.AtualizarChamadoAmbienteQa(repositorySignature);
+        }
+
+        public async Task LiberarChamadoAmbientesQa()
+        {
+            await _portalInvestimentoRepository.LiberarChamadoAmbientesQa();
         }
     }
 }

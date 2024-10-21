@@ -1,6 +1,6 @@
 ﻿USE [DCV_PI]
 GO
-/****** Object:  StoredProcedure [dbo].[P_AtualizarAmbientePacoteNovoQa]    Script Date: 09/05/2024 16:39:52 ******/
+/****** Object:  StoredProcedure [dbo].[P_AtualizarAmbientePacoteNovoQa]    Script Date: 30/08/2024 15:24:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,8 @@ ALTER PROCEDURE [dbo].[P_AtualizarAmbientePacoteNovoQa]
  @Branch NVARCHAR(100), 
  @ChamadoId INT, 
  @NegocioId INT, 
- @SituacaoId INT
+ @SituacaoId INT,
+ @Dependencia NVARCHAR(20)
 AS
 
 BEGIN
@@ -25,7 +26,8 @@ BEGIN
 		SET 
 		    Branch = @Branch ,
 		    NegocioId = @NegocioId ,
-		    SituacaoId = @SituacaoId
+		    SituacaoId = @SituacaoId,
+			Dependencia = @Dependencia
 		WHERE
 		    ChamadoId  = @ChamadoId
 		END
@@ -33,9 +35,9 @@ BEGIN
 		BEGIN
 
 		INSERT INTO ReleasePacote
-		(ReleaseId, Branch, NegocioId, SituacaoId)
+		(ReleaseId, Branch, NegocioId, SituacaoId,Dependencia)
 		VALUES
-		(@ReleaseId, @Branch, @NegocioId, @SituacaoId)
+		(@ReleaseId, @Branch, @NegocioId, @SituacaoId,@Dependencia)
 
 		END
 

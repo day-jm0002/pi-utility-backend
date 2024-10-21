@@ -57,6 +57,15 @@ namespace PI.Utility.Controllers
             return Ok(true);
         }
 
+        [HttpPost]
+        [Route(nameof(LiberarChamadoAmbientesQa))]
+        public async Task<ActionResult> LiberarChamadoAmbientesQa()
+        {
+            await _ambienteApp.LiberarChamadoAmbientesQa();
+            return Ok(true);
+        }
+
+
 
     }
 }

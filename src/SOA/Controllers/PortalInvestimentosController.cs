@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Management.Automation;
+using System.Management.Automation.Runspaces;
 using System.Threading.Tasks;
 using App.Interface;
 using App.Result;
 using App.Signature;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
+using Microsoft.Web.Administration;
 using PI.Utility.Signature;
 
 namespace PI.Utility.Controllers
@@ -25,20 +29,6 @@ namespace PI.Utility.Controllers
         {
             var usuarios = await this._piApp.ListaUsuarioAsync();
             return Ok(usuarios);
-        }
-
-        [HttpGet]
-        [Route(nameof(ObterStatusInfotreasury))]
-        public async Task<ActionResult<InfotreasuryResult>> ObterStatusInfotreasury()
-        {
-            try
-            {
-                var info = await this._piApp.ObterStatusInfotreasury();
-                return Ok(info);
-            }catch(Exception ex)
-            {
-                return NotFound(new InfotreasuryResult { Message = ex.Message});
-            }
         }
 
         [HttpPost]

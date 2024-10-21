@@ -14,6 +14,8 @@ using Microsoft.OpenApi.Models;
 using Proxy.AccessControl;
 using Proxy.DriveAMnet;
 using Proxy.DriveAMnet.Interface;
+using Proxy.Icatu;
+using Proxy.Icatu.Interface;
 using Proxy.PortalInvestimentos;
 using Proxy.PortalInvestimentos.Interface;
 using Proxy.Sinacor;
@@ -71,6 +73,7 @@ namespace PI.Utility
             services.AddScoped<IAccessControlProxy, AccessControlProxy>();
             services.AddScoped<ISmartBrainProxy, SmartBrainProxy>();
             services.AddScoped<ISisFinanceProxy, SisfinanceProxy>();
+            services.AddScoped<IIcatuProxy, IcatuProxy>();
             services.AddScoped<IPortalInvestimentosProxy, PortalInvestimentosProxy>();
 
             services.AddCors(options =>

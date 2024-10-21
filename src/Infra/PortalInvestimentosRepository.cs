@@ -281,6 +281,7 @@ namespace Infra
                 parametros.Add(new SqlParameter("@ChamadoId", SqlDbType.VarChar) { Value = signature.ChamadoId });
                 parametros.Add(new SqlParameter("@NegocioId", SqlDbType.Int) { Value = signature.NegocioTesteId });
                 parametros.Add(new SqlParameter("@SituacaoId", SqlDbType.Int) { Value = signature.SituacaoId });
+                parametros.Add(new SqlParameter("@Dependencia", SqlDbType.VarChar) { Value = signature.Dependencia });
 
                 var execute = new CreateExecuteAdo()
                     .WithParameters(parametros)
@@ -335,6 +336,22 @@ namespace Infra
                 throw;
             }
          
+        }
+
+        public async Task LiberarChamadoAmbientesQa()
+        {
+            try
+            {
+                var execute = new CreateExecuteAdo()
+                    .WithProcedure("P_Liberar_Ambiente_Qa");
+                await ExecuteNonQueryAsync(execute);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
+
         }
     }
 }

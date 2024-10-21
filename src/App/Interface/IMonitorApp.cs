@@ -14,5 +14,8 @@ namespace App.Interface
         Task<SmartBrainResult> ObterAutenticacaoSmartBrain();
         Task<SisfinanceResult> ObterAutenticacaoSisfinance();
 
+        Task<IcatuResult> ObterGrauParentescoIcatu();
+
+        Task<InfotreasuryResult> ObterStatusInfotreasury();
     }
 }

@@ -14,6 +14,7 @@ namespace App.Result
         public int SituacaoId { get; set; }
         public string Situacao { get; set; }
         public int ChamadoId { get; set; }
+        public string Dependencia { get; set; }
         public bool Apagar => false;
     }
 }

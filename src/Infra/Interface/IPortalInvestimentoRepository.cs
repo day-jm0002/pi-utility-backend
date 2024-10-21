@@ -30,6 +30,6 @@ namespace Infra
         Task<Perfil> ObterPerfilPorCodCliente(PerfilRepositorySignature signature);
         Task<IList<AmbienteStatus>> ObterStatus();
         Task AtualizarChamadoAmbienteQa(ChamadoAmbienteQaRepositorio signature);
-
+        Task LiberarChamadoAmbientesQa();
     }
 }
