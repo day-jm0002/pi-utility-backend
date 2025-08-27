@@ -23,13 +23,13 @@ namespace Infra
         Task <UsuarioPi> ObterUsuarioPorCodigoUsuarioAsync(int codUsuario);
         Task<int> AtualizarUsuarioAsync(EditarUSuarioRepositorySignature signature);
         Task<Infotreasury> ObterDataGiroInfotreasury();
-        Task<IList<Ambiente>> ObterAmbientesPI();
-        Task<AmbienteQa> ObterAmbientesPIQa();
-        Task<IList<Pacote>> ObterListaPacoteQa();
+        Task<IList<Ambiente>> ObterAmbientesPI(SistemaAmbienteRepository signature);
+        Task<AmbienteQa> ObterAmbientesPIQa(SistemaAmbienteRepository signature);
+        Task<IList<Pacote>> ObterListaPacoteQa(SistemaAmbienteRepository signature);
         Task<IList<Negocio>> ObterNegocioPI();
         Task<Perfil> ObterPerfilPorCodCliente(PerfilRepositorySignature signature);
         Task<IList<AmbienteStatus>> ObterStatus();
         Task AtualizarChamadoAmbienteQa(ChamadoAmbienteQaRepositorio signature);
-        Task LiberarChamadoAmbientesQa();
+        Task LiberarChamadoAmbientesQa(LiberarAmbienteRespositorySignature liberarAmbienteRespositorySignature);
     }
 }

@@ -3,6 +3,7 @@ using App.Result;
 using App.Signature;
 using Infra;
 using Infra.Signature;
+using Proxy.AccessControl.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -65,10 +66,13 @@ namespace App
             }
         }
 
-        public async Task<AmbienteResultQa> ObterPacoteQa()
+        public async Task<AmbienteResultQa> ObterPacoteQa(SistemaSignature sistema)
         {
-            var ambiente = await _portalInvestimentoRepository.ObterAmbientesPIQa();
-            var listaPacotes = await _portalInvestimentoRepository.ObterListaPacoteQa();
+            var sistemaRepository = new SistemaAmbienteRepository();
+            sistemaRepository.Sistema = sistema.Sistema.ToString();
+
+            var ambiente = await _portalInvestimentoRepository.ObterAmbientesPIQa(sistemaRepository);
+            var listaPacotes = await _portalInvestimentoRepository.ObterListaPacoteQa(sistemaRepository);
 
             var ambienteResultQa = new AmbienteResultQa();
             ambienteResultQa.ReleaseId = ambiente.ReleaseId;
@@ -104,10 +108,13 @@ namespace App
             return ambienteResultQa;
         }
 
-        public async Task<List<AmbienteResult>> ObterTodos()
+        public async Task<List<AmbienteResult>> ObterTodos(SistemaSignature sistema)
         {
+            var sistemaRepository = new SistemaAmbienteRepository();
+            sistemaRepository.Sistema = sistema.Sistema.ToString();
+
            var ambienteResult = new List<AmbienteResult>();
-           var ambientes = await _portalInvestimentoRepository.ObterAmbientesPI();
+           var ambientes = await _portalInvestimentoRepository.ObterAmbientesPI(sistemaRepository);
            foreach(var ambiente in ambientes)
             {
                 AmbienteResult result = new AmbienteResult();
@@ -140,9 +147,11 @@ namespace App
            await _portalInvestimentoRepository.AtualizarChamadoAmbienteQa(repositorySignature);
         }
 
-        public async Task LiberarChamadoAmbientesQa()
+        public async Task LiberarChamadoAmbientesQa(AmbienteSignatureQa ambienteSignatureQa)
         {
-            await _portalInvestimentoRepository.LiberarChamadoAmbientesQa();
+            var respositorySignature = new LiberarAmbienteRespositorySignature();
+            respositorySignature.Id = ambienteSignatureQa.Id;
+            await _portalInvestimentoRepository.LiberarChamadoAmbientesQa(respositorySignature);
         }
     }
 }

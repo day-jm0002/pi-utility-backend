@@ -19,17 +19,19 @@ namespace PI.Utility.Controllers
         }
 
         [HttpGet]
-        [Route("ObterAmbientes")]
-        public async Task<ActionResult<List<AmbienteResult>>> ObterAmbientes()
+        [Route("ObterAmbientes/{Sistema}")]
+        public async Task<ActionResult<List<AmbienteResult>>> ObterAmbientes([FromRoute] SistemaSignature sistemaSignature)
         {
-            return await _ambienteApp.ObterTodos();
+            var sistema = sistemaSignature;
+            return await _ambienteApp.ObterTodos(sistema);
         }
 
         [HttpGet]
-        [Route("ObterPacoteQa")]
-        public async Task<ActionResult<AmbienteResultQa>> ObterPacoteQa()
+        [Route("ObterPacoteQa/{Sistema}")]
+        public async Task<ActionResult<AmbienteResultQa>> ObterPacoteQa([FromRoute] SistemaSignature sistemaSignature)
         {
-            return await _ambienteApp.ObterPacoteQa();
+            var sistema = sistemaSignature;
+            return await _ambienteApp.ObterPacoteQa(sistema);
         }
 
         [HttpPost]
@@ -59,9 +61,9 @@ namespace PI.Utility.Controllers
 
         [HttpPost]
         [Route(nameof(LiberarChamadoAmbientesQa))]
-        public async Task<ActionResult> LiberarChamadoAmbientesQa()
+        public async Task<ActionResult> LiberarChamadoAmbientesQa(AmbienteSignatureQa ambienteSignatureQa)
         {
-            await _ambienteApp.LiberarChamadoAmbientesQa();
+            await _ambienteApp.LiberarChamadoAmbientesQa(ambienteSignatureQa);
             return Ok(true);
         }
 

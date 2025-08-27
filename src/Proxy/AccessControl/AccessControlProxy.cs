@@ -22,16 +22,22 @@ namespace Proxy.AccessControl
 
         public async Task<List<RoleResultProxy>> ObterListaRolePortalInvestimentos()
         {
-            _http.DefaultRequestHeaders.Accept.Clear();
-            _http.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/sjon"));
-            _http.Timeout = TimeSpan.FromMinutes(1);
-            var parametros = Sistema.CodigoDoSistema(new Sistema() { CodigoSistema = 14 });
-            var content = new StringContent(parametros, Encoding.UTF8, "application/json");
-            var result = await _http.PostAsync("http://sdaysp06qa009/AccessControl/Admin/sm/api/Role/Listar", content);
-            var json = await result.Content.ReadAsStringAsync();
-            var responseDto = JsonConvert.DeserializeObject<ResponseDto>(json);
-            var retorno = JsonConvert.DeserializeObject<List<RoleResultProxy>>(responseDto.SerializedObject);
-            return retorno;
+            try
+            {
+                _http.DefaultRequestHeaders.Accept.Clear();
+                _http.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/sjon"));
+                _http.Timeout = TimeSpan.FromMinutes(1);
+                var parametros = Sistema.CodigoDoSistema(new Sistema() { CodigoSistema = 14 });
+                var content = new StringContent(parametros, Encoding.UTF8, "application/json");
+                var result = await _http.PostAsync("http://sdaysp06qa009/AccessControl/Admin/sm/api/Role/Listar", content);
+                var json = await result.Content.ReadAsStringAsync();
+                var responseDto = JsonConvert.DeserializeObject<ResponseDto>(json);
+                var retorno = JsonConvert.DeserializeObject<List<RoleResultProxy>>(responseDto.SerializedObject);
+                return retorno;
+            }catch(Exception ex)
+            {
+                return new List<RoleResultProxy>();
+            }
         }
 
         public async Task<string> ObterTicket()

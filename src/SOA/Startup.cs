@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using PI.Utility.App;
+using PI.Utility.App.Interface;
 using Proxy.AccessControl;
 using Proxy.DriveAMnet;
 using Proxy.DriveAMnet.Interface;
@@ -66,6 +68,8 @@ namespace PI.Utility
             services.AddScoped<IMonitorApp, MonitorApp>();
             services.AddScoped<IAccessControlApp, AccessControlApp>();
             services.AddScoped<IPiApp, PiApp>();
+            services.AddScoped<IChangeApp, ChangeApp>();
+            services.AddScoped<IWordDocumentApp, WordDocumentApp>();
 
             //Proxy
             services.AddScoped<IDriveAMnetProxy, DriveAMnetProxy>();

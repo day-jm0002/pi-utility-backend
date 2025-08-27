@@ -94,15 +94,18 @@ namespace Infra
             return await ExecuteObjectAsync<Infotreasury>(execute);
         }
 
-        public async Task<IList<Ambiente>> ObterAmbientesPI()
+        public async Task<IList<Ambiente>> ObterAmbientesPI(SistemaAmbienteRepository signature)
         {
             try
             {
-                var parametros = new List<SqlParameter>(0);
+                var parametros = new List<SqlParameter>()
+                {
+                    new SqlParameter("@Sistema", SqlDbType.VarChar) { Value = signature.Sistema }
+                };
 
                 var execute = new CreateExecuteAdo()
                     .WithParameters(parametros)
-                    .WithProcedure("P_OBTER_AMBIENTES");
+                    .WithProcedure("P_OBTER_AMBIENTES_SISTEMA");
 
                 return await ExecuteListAsync<Ambiente>(execute);
             }
@@ -193,24 +196,30 @@ namespace Infra
             return await ExecuteListAsync<Negocio>(execute);
         }
 
-        public async Task<AmbienteQa> ObterAmbientesPIQa()
+        public async Task<AmbienteQa> ObterAmbientesPIQa(SistemaAmbienteRepository signature)
         {
-            var parametros = new List<SqlParameter>(0);
+            var parametros = new List<SqlParameter>()
+                {
+                    new SqlParameter("@Sistema", SqlDbType.VarChar) { Value = signature.Sistema }
+                };
 
             var execute = new CreateExecuteAdo()
                 .WithParameters(parametros)
-                .WithProcedure("P_OBTER_AMBIENTE_QA");
+                .WithProcedure("P_OBTER_AMBIENTE_QA_SISTEMA");
 
             return await ExecuteObjectAsync<AmbienteQa>(execute);
         }
 
-        public async Task<IList<Pacote>> ObterListaPacoteQa()
+        public async Task<IList<Pacote>> ObterListaPacoteQa(SistemaAmbienteRepository signature)
         {
-            var parametros = new List<SqlParameter>(0);
+            var parametros = new List<SqlParameter>()
+                {
+                    new SqlParameter("@Sistema", SqlDbType.VarChar) { Value = signature.Sistema }
+                };
 
             var execute = new CreateExecuteAdo()
                 .WithParameters(parametros)
-                .WithProcedure("P_OBTER_PACOTE_TESTE");
+                .WithProcedure("P_OBTER_PACOTE_QA_SISTEMA");
 
             return await ExecuteListAsync<Pacote>(execute);
         } 
@@ -338,11 +347,15 @@ namespace Infra
          
         }
 
-        public async Task LiberarChamadoAmbientesQa()
+        public async Task LiberarChamadoAmbientesQa(LiberarAmbienteRespositorySignature liberarAmbienteRespositorySignature)
         {
             try
             {
+                var parametros = new List<SqlParameter>();
+                parametros.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = liberarAmbienteRespositorySignature.Id});
+
                 var execute = new CreateExecuteAdo()
+                    .WithParameters(parametros)
                     .WithProcedure("P_Liberar_Ambiente_Qa");
                 await ExecuteNonQueryAsync(execute);
             }
