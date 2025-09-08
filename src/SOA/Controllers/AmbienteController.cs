@@ -19,19 +19,17 @@ namespace PI.Utility.Controllers
         }
 
         [HttpGet]
-        [Route("ObterAmbientes/{Sistema}")]
-        public async Task<ActionResult<List<AmbienteResult>>> ObterAmbientes([FromRoute] SistemaSignature sistemaSignature)
+        [Route("ObterAmbientes")]
+        public async Task<ActionResult<List<AmbienteResult>>> ObterAmbientes()
         {
-            var sistema = sistemaSignature;
-            return await _ambienteApp.ObterTodos(sistema);
+            return await _ambienteApp.ObterTodos();
         }
 
         [HttpGet]
-        [Route("ObterPacoteQa/{Sistema}")]
-        public async Task<ActionResult<AmbienteResultQa>> ObterPacoteQa([FromRoute] SistemaSignature sistemaSignature)
+        [Route("ObterPacoteQa")]
+        public async Task<ActionResult<AmbienteResultQa>> ObterPacoteQa()
         {
-            var sistema = sistemaSignature;
-            return await _ambienteApp.ObterPacoteQa(sistema);
+            return await _ambienteApp.ObterPacoteQa();
         }
 
         [HttpPost]
@@ -50,7 +48,6 @@ namespace PI.Utility.Controllers
             return Ok(true);
         }
 
-
         [HttpPost]
         [Route(nameof(AtualizarChamadoAmbientesQa))]
         public async Task<ActionResult> AtualizarChamadoAmbientesQa(AmbienteChamadoSignature ambienteQaSignature)
@@ -67,7 +64,20 @@ namespace PI.Utility.Controllers
             return Ok(true);
         }
 
+        [HttpPost]
+        [Route(nameof(AdicionarAmbiente))]
+        public async Task<ActionResult> AdicionarAmbiente()
+        {
+            var retorno = await _ambienteApp.AdicionarAmbiente();
+            return Ok(retorno);
+        }
 
-
+        [HttpPost]
+        [Route(nameof(ExcluirAmbiente))]
+        public async Task<ActionResult> ExcluirAmbiente(ExcluirAmbienteSignature signature)
+        {
+            var retorno = await _ambienteApp.ExcluirAmbiente(signature);
+            return Ok(retorno);
+        }
     }
 }

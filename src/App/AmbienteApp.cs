@@ -25,12 +25,12 @@ namespace App
         {
             var editar = new EditarAmbienteRepositorySignature();
             editar.Id = ambienteSignature.Id;
-            editar.Branch = ambienteSignature.Branch;
             editar.Descricao = ambienteSignature.Descricao;
             editar.NumeroChamado = ambienteSignature.NumeroChamado;
             editar.DevId = ambienteSignature.DevId;
             editar.NegId = ambienteSignature.NegId;
             editar.SitId = ambienteSignature.SitId;
+            editar.SisId = ambienteSignature.SisId;
             editar.Dependencia = ambienteSignature.Dependencia;
 
             await _portalInvestimentoRepository.AtualizarAmbientesPI(editar);
@@ -66,13 +66,10 @@ namespace App
             }
         }
 
-        public async Task<AmbienteResultQa> ObterPacoteQa(SistemaSignature sistema)
+        public async Task<AmbienteResultQa> ObterPacoteQa()
         {
-            var sistemaRepository = new SistemaAmbienteRepository();
-            sistemaRepository.Sistema = sistema.Sistema.ToString();
-
-            var ambiente = await _portalInvestimentoRepository.ObterAmbientesPIQa(sistemaRepository);
-            var listaPacotes = await _portalInvestimentoRepository.ObterListaPacoteQa(sistemaRepository);
+            var ambiente = await _portalInvestimentoRepository.ObterAmbientesPIQa();
+            var listaPacotes = await _portalInvestimentoRepository.ObterListaPacoteQa();
 
             var ambienteResultQa = new AmbienteResultQa();
             ambienteResultQa.ReleaseId = ambiente.ReleaseId;
@@ -108,13 +105,10 @@ namespace App
             return ambienteResultQa;
         }
 
-        public async Task<List<AmbienteResult>> ObterTodos(SistemaSignature sistema)
+        public async Task<List<AmbienteResult>> ObterTodos()
         {
-            var sistemaRepository = new SistemaAmbienteRepository();
-            sistemaRepository.Sistema = sistema.Sistema.ToString();
-
            var ambienteResult = new List<AmbienteResult>();
-           var ambientes = await _portalInvestimentoRepository.ObterAmbientesPI(sistemaRepository);
+           var ambientes = await _portalInvestimentoRepository.ObterAmbientesPI();
            foreach(var ambiente in ambientes)
             {
                 AmbienteResult result = new AmbienteResult();
@@ -131,6 +125,8 @@ namespace App
                 result.SituacaoId = ambiente.SituacaoId;
                 result.Situacao = ambiente.Situacao;
                 result.Dependencia = ambiente.Dependencia;
+                result.Sistema = ambiente.Sistema;
+                result.SistemaId = ambiente.SistemaId;
                 
                 ambienteResult.Add(result);
             }
@@ -152,6 +148,16 @@ namespace App
             var respositorySignature = new LiberarAmbienteRespositorySignature();
             respositorySignature.Id = ambienteSignatureQa.Id;
             await _portalInvestimentoRepository.LiberarChamadoAmbientesQa(respositorySignature);
+        }
+
+        public async Task<bool> AdicionarAmbiente()
+        {
+            return await _portalInvestimentoRepository.AdicionarAmbiente();
+        }
+
+        public async Task<bool> ExcluirAmbiente(ExcluirAmbienteSignature signature)
+        {
+            return await _portalInvestimentoRepository.ExcluirAmbiente(new ExcluirAmbienteRepositorySignature { Id = signature.Id });
         }
     }
 }

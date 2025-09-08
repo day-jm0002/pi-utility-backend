@@ -8,6 +8,20 @@ namespace App.Converter
 {
     public static class PortalInvestimentosConverter
     {
+        public static List<SistemasResult> ToListSistemaResult(this IList<Sistema> sistemas)
+        {
+            List<SistemasResult> result = new List<SistemasResult>();
+
+            foreach (var sistemasItem in sistemas)
+            {
+                SistemasResult sistemaResult = new SistemasResult();
+                sistemaResult.Id = sistemasItem.Id;
+                sistemaResult.Nome = sistemasItem.Nome;
+                result.Add(sistemaResult);
+            }
+            return result;
+        }
+
         public static List<DesenvolvedorResult> ToListDesenvolvedorResult(this IList<Desenvolvedor> desenvolvedor)
         {
             List<DesenvolvedorResult> result = new List<DesenvolvedorResult>();

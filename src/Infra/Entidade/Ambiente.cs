@@ -20,5 +20,7 @@ namespace Infra.Entidade
         public string Link { get; set; }
         public string Situacao { get; set; }
         public string Dependencia { get; set; }
+        public int SistemaId { get; set; }
+        public string Sistema { get; set; }
     }
 }

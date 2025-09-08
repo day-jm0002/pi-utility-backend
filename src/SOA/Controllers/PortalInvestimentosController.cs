@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using App.Interface;
 using App.Result;
 using App.Signature;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
-using Microsoft.Web.Administration;
 using PI.Utility.Signature;
 
 namespace PI.Utility.Controllers

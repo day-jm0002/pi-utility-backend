@@ -70,6 +70,7 @@ namespace PI.Utility
             services.AddScoped<IPiApp, PiApp>();
             services.AddScoped<IChangeApp, ChangeApp>();
             services.AddScoped<IWordDocumentApp, WordDocumentApp>();
+            services.AddScoped<ISistemaApp, SistemasApp>();
 
             //Proxy
             services.AddScoped<IDriveAMnetProxy, DriveAMnetProxy>();

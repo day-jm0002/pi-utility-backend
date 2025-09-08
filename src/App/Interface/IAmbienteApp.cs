@@ -9,11 +9,13 @@ namespace App.Interface
 {
     public interface IAmbienteApp
     {
-        Task<List<AmbienteResult>> ObterTodos(SistemaSignature sistema);
-        Task<AmbienteResultQa> ObterPacoteQa(SistemaSignature sistema);
+        Task<List<AmbienteResult>> ObterTodos();
+        Task<AmbienteResultQa> ObterPacoteQa();
         Task AtualizarAmbiente(AmbienteSignature ambienteSignature);
         Task AtualizarAmbienteQa(AmbienteSignatureQa ambienteSignature);
         Task AtualizarChamadoAmbienteQa(AmbienteChamadoSignature ambienteSignature);
         Task LiberarChamadoAmbientesQa(AmbienteSignatureQa ambienteSignatureQa);
+        Task <bool> AdicionarAmbiente();
+        Task<bool> ExcluirAmbiente(ExcluirAmbienteSignature signature);
     }
 }

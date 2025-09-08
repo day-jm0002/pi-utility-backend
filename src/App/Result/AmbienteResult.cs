@@ -13,16 +13,15 @@ namespace App.Result
         public string Descricao { get; set; }
         public int DevId { get; set; }
         public int NegId { get; set; }
-
         public int SituacaoId { get; set; }
-
         public string Negocio { get; set; }
-
         public string Desenvolvedor { get; set; }
         public string Link { get; set; }
-
         public string Situacao { get; set; }
         public string Dependencia { get; set; }
+        public int SistemaId { get; set; }
+        public string Sistema { get; set; }
+
 
     }
 }
