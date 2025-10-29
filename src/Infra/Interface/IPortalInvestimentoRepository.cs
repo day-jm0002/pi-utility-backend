@@ -34,5 +34,7 @@ namespace Infra
         Task<IList<Sistema>> ObterSistemas();
         Task<bool> AdicionarAmbiente();
         Task<bool> ExcluirAmbiente(ExcluirAmbienteRepositorySignature signature);
+
+        Task<IList<Ambiente>> ConsultarAmbientesPI(ConsultarAmbientesRespositorySignature signature);
     }
 }

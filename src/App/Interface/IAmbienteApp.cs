@@ -17,5 +17,7 @@ namespace App.Interface
         Task LiberarChamadoAmbientesQa(AmbienteSignatureQa ambienteSignatureQa);
         Task <bool> AdicionarAmbiente();
         Task<bool> ExcluirAmbiente(ExcluirAmbienteSignature signature);
+
+        Task<List<AmbienteResult>> ConsultarAmbientes(FiltrarAmbientesSignature signature);
     }
 }

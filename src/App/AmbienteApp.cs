@@ -133,6 +133,37 @@ namespace App
             return ambienteResult;
         }
 
+        public async Task<List<AmbienteResult>> ConsultarAmbientes(FiltrarAmbientesSignature signature)
+        {
+            var consultar = new ConsultarAmbientesRespositorySignature();
+            consultar.Filtro = signature.Filtro;
+
+            var ambienteResult = new List<AmbienteResult>();
+            var ambientes = await _portalInvestimentoRepository.ConsultarAmbientesPI(consultar) ;
+            foreach (var ambiente in ambientes)
+            {
+                AmbienteResult result = new AmbienteResult();
+                result.Id = ambiente.Id;
+                result.Nome = ambiente.Nome;
+                result.Branch = ambiente.Branch;
+                result.NumeroChamado = ambiente.NumeroChamado;
+                result.Descricao = ambiente.Descricao;
+                result.DevId = ambiente.DevId;
+                result.Desenvolvedor = ambiente.Desenvolvedor;
+                result.NegId = ambiente.NegId;
+                result.Negocio = ambiente.Negocio;
+                result.Link = ambiente.Link;
+                result.SituacaoId = ambiente.SituacaoId;
+                result.Situacao = ambiente.Situacao;
+                result.Dependencia = ambiente.Dependencia;
+                result.Sistema = ambiente.Sistema;
+                result.SistemaId = ambiente.SistemaId;
+
+                ambienteResult.Add(result);
+            }
+            return ambienteResult;
+        }
+
         public async Task AtualizarChamadoAmbienteQa(AmbienteChamadoSignature ambienteSignature)
         {
             var repositorySignature = new ChamadoAmbienteQaRepositorio();

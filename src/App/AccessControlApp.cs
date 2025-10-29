@@ -59,7 +59,7 @@ namespace App
 
         public async Task<SsoResult> ObterTicketSSO(string CodigoCliente)
         {
-            var url = "http://sdaysp06d006:8080/loginSso?ticketSso=";
+            var url = "https://portalinvestimentosint.daycoval.dev.br/loginSso?ticketSso=";
             var retorno = await _accessControlProxy.ObterTicket(CodigoCliente);
             var ssoResult = new SsoResult();
             ssoResult.Ticket = url + retorno;

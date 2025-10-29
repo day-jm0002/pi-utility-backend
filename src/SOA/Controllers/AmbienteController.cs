@@ -25,6 +25,13 @@ namespace PI.Utility.Controllers
             return await _ambienteApp.ObterTodos();
         }
 
+        [HttpPost]
+        [Route("FiltrarAmbiente")]
+        public async Task<ActionResult<List<AmbienteResult>>> FiltrarAmbiente(FiltrarAmbientesSignature signature)
+        {
+            return await _ambienteApp.ConsultarAmbientes(signature);
+        }
+
         [HttpGet]
         [Route("ObterPacoteQa")]
         public async Task<ActionResult<AmbienteResultQa>> ObterPacoteQa()

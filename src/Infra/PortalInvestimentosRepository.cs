@@ -111,6 +111,26 @@ namespace Infra
            
         }
 
+        public async Task<IList<Ambiente>> ConsultarAmbientesPI(ConsultarAmbientesRespositorySignature signature)
+        {
+            try
+            {
+                var parametros = new List<SqlParameter>();
+                parametros.Add(new SqlParameter("@Filtro", SqlDbType.Text) { Value = signature.Filtro });
+
+                var execute = new CreateExecuteAdo()
+                    .WithParameters(parametros)
+                    .WithProcedure("P_PROCURAR_CHAMADO");
+
+                return await ExecuteListAsync<Ambiente>(execute);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public async Task AtualizarAmbientesPI(EditarAmbienteRepositorySignature signature)
         {
             try
