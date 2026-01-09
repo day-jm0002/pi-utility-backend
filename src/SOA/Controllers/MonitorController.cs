@@ -1,5 +1,6 @@
 ﻿using App.Interface;
 using App.Result;
+using App.Signature;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proxy.DriveAMnet.Interface;
@@ -103,6 +104,13 @@ namespace PI.Utility.Controllers
             {
                 return NotFound(new InfotreasuryResult { Message = ex.Message });
             }
+        }
+        [HttpPost]
+        [Route(nameof (LimparCacheCatalogoRendaFixa))]
+        public async Task<ActionResult> LimparCacheCatalogoRendaFixa(CacheRendaFixaSignature signature)
+        {
+            await _monitorApp.LimparCacheRendaFixa(signature);
+            return Ok();
         }
 
     }

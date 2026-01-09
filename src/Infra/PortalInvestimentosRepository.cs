@@ -21,6 +21,18 @@ namespace Infra
             
         }
 
+        public async Task<IList<AgendaEmail>> ObterEmailAgendado(AgendaEmailRepositorySignature signature)
+        {
+            var parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@DATACADASTRO", SqlDbType.DateTime) { Value = signature.DataCastro });
+
+            var execute = new CreateExecuteAdo()
+                .WithParameters(parametros)
+                .WithProcedure("DBO.UTILITY_P_OBTER_AGENDAMENTOS_EMAIL");
+
+            return await ExecuteListAsync<AgendaEmail>(execute);
+        }
+
         public async Task<IList<UsuarioPi>> ObterListaUsuarioAsync()
         {
             

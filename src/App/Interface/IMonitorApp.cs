@@ -1,4 +1,5 @@
 ﻿using App.Result;
+using App.Signature;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -17,5 +18,6 @@ namespace App.Interface
         Task<IcatuResult> ObterGrauParentescoIcatu();
 
         Task<InfotreasuryResult> ObterStatusInfotreasury();
+        Task LimparCacheRendaFixa(CacheRendaFixaSignature signature);
     }
 }

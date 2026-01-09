@@ -36,5 +36,8 @@ namespace Infra
         Task<bool> ExcluirAmbiente(ExcluirAmbienteRepositorySignature signature);
 
         Task<IList<Ambiente>> ConsultarAmbientesPI(ConsultarAmbientesRespositorySignature signature);
+
+        Task<IList<AgendaEmail>> ObterEmailAgendado(AgendaEmailRepositorySignature signature);
+
     }
 }

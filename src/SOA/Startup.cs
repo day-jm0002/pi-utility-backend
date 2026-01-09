@@ -14,6 +14,8 @@ using Microsoft.OpenApi.Models;
 using PI.Utility.App;
 using PI.Utility.App.Interface;
 using Proxy.AccessControl;
+using Proxy.ApiCatalogRendaFixa;
+using Proxy.ApiCatalogRendaFixa.Interface;
 using Proxy.DriveAMnet;
 using Proxy.DriveAMnet.Interface;
 using Proxy.Icatu;
@@ -51,7 +53,6 @@ namespace PI.Utility
             services.AddScoped<IAccessControlRepository, AccessControlRepository>();
             services.AddScoped<IPortalInvestimentoQaRepository, PortalInvestimentosQaRepository>();
 
-
             //Parameters
             services.AddScoped<IConnectionParameters, DcvInvestimentoParameter>();
             services.AddScoped<IConnectionParameters, DcvPortalInvestimentosParameters>();
@@ -71,7 +72,7 @@ namespace PI.Utility
             services.AddScoped<IChangeApp, ChangeApp>();
             services.AddScoped<IWordDocumentApp, WordDocumentApp>();
             services.AddScoped<ISistemaApp, SistemasApp>();
-
+            services.AddScoped<IMailerApp, MailerApp>();
             //Proxy
             services.AddScoped<IDriveAMnetProxy, DriveAMnetProxy>();
             services.AddScoped<ISinacorProxy,SinacorProxy>();
@@ -80,6 +81,7 @@ namespace PI.Utility
             services.AddScoped<ISisFinanceProxy, SisfinanceProxy>();
             services.AddScoped<IIcatuProxy, IcatuProxy>();
             services.AddScoped<IPortalInvestimentosProxy, PortalInvestimentosProxy>();
+            services.AddScoped<IApiCatalogoRendaFixaProxy, ApiCatalogoRendaFixaProxy>();
 
             services.AddCors(options =>
             {

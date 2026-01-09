@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using Infra.Converter;
 using Infra;
+using Proxy.ApiCatalogRendaFixa.Interface;
+using App.Signature.Enum;
+using App.Signature;
 
 namespace App
 {
@@ -20,8 +23,9 @@ namespace App
         private readonly ISisFinanceProxy _sisfinance;
         private readonly IIcatuProxy _icatu;
         private readonly IPortalInvestimentoRepository _usuarioPiRepository;
+        private readonly IApiCatalogoRendaFixaProxy _apiCatalogoRendaFixaProxy;
 
-        public MonitorApp(IDriveAMnetProxy driveAMnetProxy, ISinacorProxy sinacorProxy, ISmartBrainProxy smartBrainProxy, ISisFinanceProxy sisFinanceProxy, IIcatuProxy icatuProxy, IPortalInvestimentoRepository portalInvestimentoRepository)
+        public MonitorApp(IDriveAMnetProxy driveAMnetProxy, ISinacorProxy sinacorProxy, ISmartBrainProxy smartBrainProxy, ISisFinanceProxy sisFinanceProxy, IIcatuProxy icatuProxy, IPortalInvestimentoRepository portalInvestimentoRepository, IApiCatalogoRendaFixaProxy apiCatalogoRendaFixaProxy)
         {
             _driveAMnetProxy = driveAMnetProxy;
             _sinacorProxy = sinacorProxy;
@@ -29,6 +33,7 @@ namespace App
             _sisfinance = sisFinanceProxy;
             _icatu = icatuProxy;
             _usuarioPiRepository = portalInvestimentoRepository;
+            _apiCatalogoRendaFixaProxy = apiCatalogoRendaFixaProxy;
         }
         public async Task<DriveAMnetResult> ObterAutenticacaoDriveAMnet()
         {
@@ -119,6 +124,36 @@ namespace App
         {
             var infotreasury = await _usuarioPiRepository.ObterDataGiroInfotreasury();
             return new InfotreasuryResult { DataGiro = infotreasury.DataGiro, Message = "Ok" };
+        }
+
+        public async Task LimparCacheRendaFixa(CacheRendaFixaSignature signature)
+        {
+            switch (signature.Tipo)
+            {
+                case TipoCacheRendaFixa.Gerentes:
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoGerentes();
+                    break;
+
+                case TipoCacheRendaFixa.Lastros:
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoLastros();
+                    break;
+
+                case TipoCacheRendaFixa.ProdutosBancarios:
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoProdutosBancarios();
+                    break;
+
+                case TipoCacheRendaFixa.ProdutosPrivados:
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoProdutosPrivado();
+                    break;
+                case TipoCacheRendaFixa.Todos:
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoGerentes();
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoLastros();
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoProdutosBancarios();
+                    await _apiCatalogoRendaFixaProxy.LimparCacheApiCatalogoProdutosPrivado();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(signature.Tipo), signature.Tipo, "Tipo de cache não suportado.");
+            }           
         }
 
     }

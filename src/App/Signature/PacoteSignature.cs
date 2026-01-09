@@ -10,7 +10,7 @@ namespace App.Signature
         public int ChamadoId { get; set; }
         public int NegocioTesteId { get; set; }
         public int SituacaoId { get; set; }
-        public string Dependencia { get; set; }
+        public string? Dependencia { get; set; }
         public bool Apagar { get; set; }
     }
 }
